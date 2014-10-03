@@ -9,13 +9,14 @@ rmax=${RANDMIN:-5}
 rm -rf .git
 git init
 
-for i in $( seq 0 -1 -${days} ); do
+for i in $( seq 0 $(( days - 1 )) ); do
 	rand=$(( RANDOM % ( rmax - rmin ) + rmin ))
-	for j in $( seq -1 -1 -${rand} ); do
-		time=$(date --date="$i day $j hour" "+%s %z")
-		echo "${time}" > time
+	for j in $( seq 0 $(( rand - 1 )) ); do
+		target="-$i day -$j hour"
+		time=$(date --date="${target}" "+%s %z")
+		echo "${target}" > time
 		git add time
-		git commit --date="${time}" -m "${time}"
+		git commit --date="${time}" -m "${target}"
 	done
 done
 
