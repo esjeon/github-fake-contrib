@@ -4,7 +4,7 @@ set -e
 
 days=$1
 rmin=${RANDMIN:-1}
-rmax=${RANDMIN:-5}
+rmax=${RANDMAX:-5}
 
 rm -rf .git
 git init
