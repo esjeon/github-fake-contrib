@@ -9,10 +9,10 @@ rmax=${RANDMIN:-5}
 rm -rf .git
 git init
 
-for i in $( seq 0 $(( days - 1 )) ); do
+for i in $( seq -$(( days - 1 )) 0 ); do
 	rand=$(( RANDOM % ( rmax - rmin ) + rmin ))
-	for j in $( seq 0 $(( rand - 1 )) ); do
-		target="-$i day -$j hour"
+	for j in $( seq -$(( rand - 1 )) 0 ); do
+		target="$i day $j hour"
 		time=$(date --date="${target}" "+%s %z")
 		echo "${target}" > time
 		git add time
